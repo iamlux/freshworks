@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'Source Sans Pro Semibold';
+  font-style: normal;
+  src: url("../fonts/SourceSansPro-Semibold.ttf");
+  /* IE9 Compat Modes */
+  src: local("Source Sans Pro Semibold"), local("Source Sans Pro Semibold"), url("../fonts/SourceSansPro-Semibold.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Source Sans Pro Light';
+  font-style: normal;
+  src: url("../fonts/SourceSansPro-Light.ttf");
+  /* IE9 Compat Modes */
+  src: local("Source Sans Pro Light"), local("Source Sans Pro Light"), url("../fonts/SourceSansPro-Light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Source Sans Pro Regular';
+  font-style: normal;
+  src: url("../fonts/SourceSansPro-Regular.ttf");
+  /* IE9 Compat Modes */
+  src: local("Source Sans Pro Regular"), local("Source Sans Pro Regular"), url("../fonts/SourceSansPro-Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Source Sans Pro Bold';
+  font-style: normal;
+  src: url("../fonts/SourceSansPro-Bold.ttf");
+  /* IE9 Compat Modes */
+  src: local("Source Sans Pro Bold"), local("Source Sans Pro Bold"), url("../fonts/SourceSansPro-Bold.ttf") format("truetype"); }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Source Sans Pro Light, sans-serif;
+  background-color: #fff;
+  color: #2c2f42; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c2f42; }
+
+a {
+  text-decoration: none;
+  color: #2c2f42; }
+  a:hover {
+    color: #00b277; }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  ul li {
+    cursor: pointer; }
+
+.text-align-center {
+  text-align: center; }
