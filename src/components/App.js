@@ -118,7 +118,7 @@ class App extends Component {
       return (<ul>
         {this.state.installed_apps.map((val) => {
           return <li key={val.id} className="installed-app">
-            <img src={val.imageUrl} />
+            <img src={val.imageUrl} className="image_box" />
             <div className="app-description">
               <p>{val.name}</p>
               <p>{val.description}</p>
@@ -143,7 +143,7 @@ class App extends Component {
 
   renderDialog() {
     return (<div className="selectedApp">
-      <img src={this.state.selectedApp.imageUrl} />
+      <img src={this.state.selectedApp.imageUrl} className="image_box" />
       <div className="app-description">
         <p>{this.state.selectedApp.name}</p>
         <p>{this.state.selectedApp.description}</p>

@@ -51,3 +51,8 @@ ul {
         float: left; }
     .freshworks .freshworks-body .no-data-available {
       text-align: center; }
+    .freshworks .freshworks-body .image_box {
+      width: 10%;
+      float: left; }
+    .freshworks .freshworks-body .app-description {
+      width: 90%; }
