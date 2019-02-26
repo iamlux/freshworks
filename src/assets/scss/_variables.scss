@@ -1,39 +1,4 @@
-@font-face {
-    font-family: 'Source Sans Pro Semibold';
-    font-style: normal;
-    src: url('../fonts/SourceSansPro-Semibold.ttf'); /* IE9 Compat Modes */
-    src: local('Source Sans Pro Semibold'), local('Source Sans Pro Semibold'),
-         url('../fonts/SourceSansPro-Semibold.ttf') format('truetype'), /* Safari, Android, iOS */
-  }
-  
-  @font-face {
-    font-family: 'Source Sans Pro Light';
-    font-style: normal;
-    src: url('../fonts/SourceSansPro-Light.ttf'); /* IE9 Compat Modes */
-    src: local('Source Sans Pro Light'), local('Source Sans Pro Light'),
-         url('../fonts/SourceSansPro-Light.ttf') format('truetype'), /* Safari, Android, iOS */
-  }
-  
-  @font-face {
-    font-family: 'Source Sans Pro Regular';
-    font-style: normal;
-    src: url('../fonts/SourceSansPro-Regular.ttf'); /* IE9 Compat Modes */
-    src: local('Source Sans Pro Regular'), local('Source Sans Pro Regular'),
-         url('../fonts/SourceSansPro-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
-  }
-  
-  @font-face {
-    font-family: 'Source Sans Pro Bold';
-    font-style: normal;
-    src: url('../fonts/SourceSansPro-Bold.ttf'); /* IE9 Compat Modes */
-    src: local('Source Sans Pro Bold'), local('Source Sans Pro Bold'),
-         url('../fonts/SourceSansPro-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
-  }
-  
-  $font-stack-regular: Source Sans Pro Regular, sans-serif;
-  $font-stack-semibold: Source Sans Pro Semibold, sans-serif;
-  $font-stack-bold: Source Sans Pro Bold, sans-serif;
-  $font-stack-light: Source Sans Pro Light, sans-serif;
-  $primary-background-color: #fff;
+  $primary-background-color: #dee5ea;
+  $secondary-background-color: #fff;
   $primary-color: #2c2f42;
   $secondary-color: #00b277;

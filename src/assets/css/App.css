@@ -1,37 +1,7 @@
-@font-face {
-  font-family: 'Source Sans Pro Semibold';
-  font-style: normal;
-  src: url("../fonts/SourceSansPro-Semibold.ttf");
-  /* IE9 Compat Modes */
-  src: local("Source Sans Pro Semibold"), local("Source Sans Pro Semibold"), url("../fonts/SourceSansPro-Semibold.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Source Sans Pro Light';
-  font-style: normal;
-  src: url("../fonts/SourceSansPro-Light.ttf");
-  /* IE9 Compat Modes */
-  src: local("Source Sans Pro Light"), local("Source Sans Pro Light"), url("../fonts/SourceSansPro-Light.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Source Sans Pro Regular';
-  font-style: normal;
-  src: url("../fonts/SourceSansPro-Regular.ttf");
-  /* IE9 Compat Modes */
-  src: local("Source Sans Pro Regular"), local("Source Sans Pro Regular"), url("../fonts/SourceSansPro-Regular.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Source Sans Pro Bold';
-  font-style: normal;
-  src: url("../fonts/SourceSansPro-Bold.ttf");
-  /* IE9 Compat Modes */
-  src: local("Source Sans Pro Bold"), local("Source Sans Pro Bold"), url("../fonts/SourceSansPro-Bold.ttf") format("truetype"); }
-
 body {
   margin: 0;
   padding: 0;
-  font-family: Source Sans Pro Light, sans-serif;
-  background-color: #fff;
-  color: #2c2f42; }
+  background-color: #dee5ea; }
 
 h1, h2, h3, h4, h5, h6 {
   color: #2c2f42; }
@@ -52,61 +22,29 @@ ul {
 .text-align-center {
   text-align: center; }
 
-.sitemap {
+.freshworks {
   width: 80%;
-  margin: 0 auto; }
-  .sitemap .sitemap-header h2 {
-    font-family: Source Sans Pro Semibold, sans-serif; }
-  .sitemap .sitemap-heading {
-    margin: 48px 0; }
-    .sitemap .sitemap-heading h4 {
-      font-family: Source Sans Pro Bold, sans-serif;
-      border-bottom: 1px dashed #ccc;
-      padding-bottom: 16px; }
-    .sitemap .sitemap-heading ul.sitemap-heading__list {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between; }
-      .sitemap .sitemap-heading ul.sitemap-heading__list li {
-        width: 20%;
-        font-family: Source Sans Pro Light, sans-serif;
+  margin: 0 auto;
+  background: #fff; }
+  .freshworks .freshworks-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ccc; }
+  .freshworks .freshworks-body {
+    background: #fff; }
+    .freshworks .freshworks-body .categories {
+      width: 20%;
+      padding: 11px; }
+      .freshworks .freshworks-body .categories li {
+        color: blue;
+        padding: 10px; }
+        .freshworks .freshworks-body .categories li:hover {
+          color: black;
+          background: #dee5ea; }
+    .freshworks .freshworks-body .selected-body {
+      width: 78%;
+      float: right; }
+      .freshworks .freshworks-body .selected-body .installed-apps .installed-app {
         float: left; }
-        .sitemap .sitemap-heading ul.sitemap-heading__list li:hover {
-          color: #00b277; }
-    .sitemap .sitemap-heading.sitemap-filter.sticky .sitemap-filter__heading {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      z-index: 1;
-      background-color: #fff; }
-    .sitemap .sitemap-heading.sitemap-filter h4 {
-      margin: 0; }
-    .sitemap .sitemap-heading.sitemap-filter ul.sitemap-filter__heading {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      border-bottom: 1px dashed #ccc; }
-      .sitemap .sitemap-heading.sitemap-filter ul.sitemap-filter__heading li {
-        float: left;
-        padding: 15px 6px;
-        font-family: Source Sans Pro Semibold, sans-serif; }
-        .sitemap .sitemap-heading.sitemap-filter ul.sitemap-filter__heading li:hover {
-          color: #00b277; }
-    .sitemap .sitemap-heading.sitemap-filter .sitemap-filter__content {
-      margin: 10px 0; }
-      .sitemap .sitemap-heading.sitemap-filter .sitemap-filter__content .sitemap-filter__content__list {
-        display: flex;
-        flex-direction: row;
-        margin: 40px 0; }
-        .sitemap .sitemap-heading.sitemap-filter .sitemap-filter__content .sitemap-filter__content__list .sitemap-filter__content__list__index {
-          width: 20%;
-          font-family: Source Sans Pro Bold, sans-serif; }
-        .sitemap .sitemap-heading.sitemap-filter .sitemap-filter__content .sitemap-filter__content__list .sitemap-filter__content__list__result {
-          width: 80%; }
-          .sitemap .sitemap-heading.sitemap-filter .sitemap-filter__content .sitemap-filter__content__list .sitemap-filter__content__list__result ul.sitemap-heading__list li {
-            padding: 10px;
-            width: 40%; }
+    .freshworks .freshworks-body .no-data-available {
+      text-align: center; }

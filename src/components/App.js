@@ -6,36 +6,33 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      destinations: [],
-      vacations: [],
-      itineraries: []
+      apps: [],
+      selectedApps: [],
+      installed_apps: [],
+      showAllApps: false,
+      openDialog: false,
+      categories: [],
+      selectedApp: {},
     };
-    this.myRef = React.createRef();
+    this.openAllApps = this.openAllApps.bind(this);
+    this.selectedCategories = this.selectedCategories.bind(this);
+    this.installApp = this.installApp.bind(this);
+    this.closeAllApps = this.closeAllApps.bind(this);
   }
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-    axios.get('http://localhost:8000/api/sitemap')
+
+  componentWillMount() {
+    axios.get('https://api.jsonbin.io/b/5bee9acc3c134f38b019e808/1')
       .then((response) => {
-        const { destinations, vacations, itineraries } = response.data.data;
-        const filters = [];
-        itineraries.forEach((data) => {
-          let text = data.text.toLowerCase().trim().charAt(0).toUpperCase();
-          if (!isNaN(text)) {
-            if (typeof filters["0-9"] === 'undefined') {
-              filters["0-9"] = [];
-            }
-            filters["0-9"].push(data.text);
-          } else {
-            if (typeof filters[text] === 'undefined') {
-              filters[text] = [];
-            }
-            filters[text].push(data.text);
+        let categories = ["All"];
+        response.data.data.forEach(element => {
+          if (categories.indexOf(element.category) === -1) {
+            categories.push(element.category);
           }
         });
         this.setState({
-          destinations,
-          vacations,
-          itineraries: filters
+          apps: response.data.data,
+          selectedApps: response.data.data,
+          categories: categories
         });
       })
       .catch((error) => {
@@ -43,90 +40,147 @@ class App extends Component {
       });
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+  openAllApps() {
+    this.setState({
+      showAllApps: true
+    });
   }
 
-  handleScroll = () => {
-    let lastScrollY = 0;
-    lastScrollY = window.scrollY;
-    if (lastScrollY >= this.myRef.current.offsetTop) {
-      this.myRef.current.classList.add("sticky");
+  closeAllApps() {
+    this.setState({
+      showAllApps: false
+    });
+  }
+
+  selectedCategories(name) {
+    let apps;
+    if (name === "all") {
+      apps = this.state.apps;
     } else {
-      this.myRef.current.classList.remove("sticky");
+      apps = this.state.apps.filter((val) => {
+        return val.category === name;
+      });
     }
+
+
+    this.setState({
+      selectedApps: apps
+    });
   }
 
-  renderDestination() {
-    return (
-      <section className="sitemap-heading">
-        <h4>Destinations</h4>
-        {this.state.destinations.length > 0 ? <ul className="sitemap-heading__list">
-          {this.state.destinations.map((data) => {
-            return <li key={data.id}><a href={data.url} target="_blank">{data.text}</a></li>;
-          })}
-        </ul> : <p className="text-align-center">No data available</p>}
-      </section>
-    );
+  openInstallDialog(id) {
+    const app = this.state.apps.filter((val) => {
+      return val.id === id
+    });
+    this.setState({
+      openDialog: true,
+      selectedApp: (app.length > 0) ? app[0] : {}
+    });
   }
 
-  renderVacation() {
-    return (<section className="sitemap-heading">
-      <h4>Themed vacations</h4>
-      {this.state.destinations.length > 0 ? <ul className="sitemap-heading__list">
-        {this.state.vacations.map((data) => {
-          return <li key={data.id}><a href={data.url} target="_blank">{data.text}</a></li>;
+  installApp(id) {
+    const installedApps = this.state.installed_apps;
+    const selectedApp = this.state.apps.filter((val) => {
+      return val.id === id;
+    });
+    installedApps.push(selectedApp[0]);
+    this.setState({
+      installed_apps: installedApps,
+      openDialog: false,
+    });
+  }
+
+
+  deleteApp(id) {
+    const installedApps = this.state.installed_apps;
+    const selectedAppIndex = installedApps.findIndex((val) => {
+      return val.id === id;
+    });
+    installedApps.splice(selectedAppIndex, 1);
+    this.setState({
+      installed_apps: installedApps
+    });
+  }
+  renderAllApps() {
+    return (<ul className="installed-apps">
+      {this.state.selectedApps.map((val) => {
+        return <li key={val.id} className="installed-app" onClick={() => this.openInstallDialog(val.id)}>
+          <img src={val.imageUrl} />
+          {val.name}
+        </li>;
+      })}
+    </ul>);
+  }
+
+  renderInstalledApp() {
+    if (this.state.installed_apps.length > 0) {
+      return (<ul>
+        {this.state.installed_apps.map((val) => {
+          return <li key={val.id} className="installed-app">
+            <img src={val.imageUrl} />
+            <div className="app-description">
+              <p>{val.name}</p>
+              <p>{val.description}</p>
+              <button onClick={() => this.deleteApp(val.id)}>Delete</button>
+            </div>
+          </li>;
         })}
-      </ul> : <p className="text-align-center">No data available</p>}
-    </section>);
+      </ul>);
+    } else {
+      return <p className="no-data-available">No Apps Installed</p>
+    }
+
   }
 
-  setPosition(elementId) {
-    const ele = document.getElementById(elementId);
-    this.myRef.current.classList.add("sticky");
-    window.scrollTo(0, ele.offsetTop - document.getElementById('sitemap_filter_title').offsetHeight - 10);
+  renderCategories() {
+    return (<ul>
+      {this.state.categories.map((val) => {
+        return <li key={val} onClick={() => this.selectedCategories(val)}>{val}</li>
+      })}
+    </ul>);
   }
 
-  renderFilterPages() {
-    const itineraries = this.state.itineraries;
-    debugger;
-    return (
-      <section className="sitemap-heading sitemap-filter" ref={this.myRef}>
-        <h4>Showing all 321 pages</h4>
-        {Object.keys(itineraries).length ? <React.Fragment><ul className="sitemap-filter__heading" id="sitemap_filter_title">
-          {Object.keys(itineraries).sort().map((data, index) => {
-            return <li key={index}><a href="javascript:void(0)" onClick={() => this.setPosition(data)}>{data}</a></li>;
-          })}
-        </ul>
-          <div className="sitemap-filter__content">
-            {Object.keys(itineraries).sort().map((data, index) => {
-              return <div className="sitemap-filter__content__list" key={index} id={data}>
-                <div className="sitemap-filter__content__list__index">
-                  {data}
-                </div>
-                <div className="sitemap-filter__content__list__result">
-                  <ul className="sitemap-heading__list">
-                    {itineraries[data].map((value, index) => {
-                      return <li key={index}>{value}</li>;
-                    })}
-                  </ul>
-                </div>
-              </div>
-            })}
-          </div></React.Fragment> : <p className="text-align-center">No data available</p>}
-      </section>
-    );
+  renderDialog() {
+    return (<div className="selectedApp">
+      <img src={this.state.selectedApp.imageUrl} />
+      <div className="app-description">
+        <p>{this.state.selectedApp.name}</p>
+        <p>{this.state.selectedApp.description}</p>
+        <button onClick={() => this.installApp(this.state.selectedApp.id)}>Install</button>
+      </div>
+    </div>);
   }
+
 
   render() {
     return (
-      <div className="sitemap">
-        <header className="sitemap-header">
-          <h2>Pickyourtrail sitemap</h2>
+      <div className="freshworks">
+        <header className="freshworks-header">
+          <div className="freshworks-header__apps">
+            <h3>Apps</h3>
+          </div>
+          <div className="freshworks-header__button">
+            <button onClick={() => this.openAllApps()}>Get Apps</button>
+          </div>
         </header>
-        {this.renderDestination()}
-        {this.renderVacation()}
-        {this.renderFilterPages()}
+        <section className="freshworks-body">
+          {this.state.showAllApps && <React.Fragment>
+            <div className="categories">{this.renderCategories()}</div>
+            <div className="selected-body">
+              {!this.state.openDialog ? <div className="allApps">
+                {this.renderAllApps()}
+                <p className="closeApps" onClick={() => this.closeAllApps()}>Close</p>
+              </div>
+                : <div className="installed-dialog">
+                  {this.renderDialog()}
+                </div>
+              }</div></React.Fragment>
+          }
+          {!this.state.showAllApps && <div className="installedApps">
+            {this.renderInstalledApp()}
+          </div>
+          }
+        </section>
       </div>
     );
   }
