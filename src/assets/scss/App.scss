@@ -10,10 +10,13 @@
     border-bottom: 2px solid #ccc;
   }
   .freshworks-body {
+    float: left;
+    width: 100%;
     background: $secondary-background-color;
       .categories {
         width: 20%;
         padding: 11px;
+        display: inline-block;
         li {
           color: blue;
           padding: 10px;

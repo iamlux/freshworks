@@ -54,7 +54,7 @@ class App extends Component {
 
   selectedCategories(name) {
     let apps;
-    if (name === "all") {
+    if (name === "All") {
       apps = this.state.apps;
     } else {
       apps = this.state.apps.filter((val) => {
@@ -64,7 +64,8 @@ class App extends Component {
 
 
     this.setState({
-      selectedApps: apps
+      selectedApps: apps,
+      openDialog: false,
     });
   }
 

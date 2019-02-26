@@ -31,10 +31,13 @@ ul {
     justify-content: space-between;
     border-bottom: 2px solid #ccc; }
   .freshworks .freshworks-body {
+    float: left;
+    width: 100%;
     background: #fff; }
     .freshworks .freshworks-body .categories {
       width: 20%;
-      padding: 11px; }
+      padding: 11px;
+      display: inline-block; }
       .freshworks .freshworks-body .categories li {
         color: blue;
         padding: 10px; }
